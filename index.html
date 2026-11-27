@@ -385,31 +385,32 @@ function wrapN(g,text,maxW,n){const out=[];let line='';
 function spaced(g,text,x,y,sp){for(const ch of text){g.fillText(ch,x,y);x+=g.measureText(ch).width+sp;}}
 function spacedC(g,text,cx,y,sp){let w=0;for(const ch of text)w+=g.measureText(ch).width+sp;g.textAlign='left';spaced(g,text,cx-w/2,y,sp);g.textAlign='center';}
 
-const titleC=cnv(2048,1024),titleT=texFrom(titleC);const LOGO=new Image();LOGO.onload=()=>drawTitle();LOGO.src='kmu-logo-ink.png';
-function whiteLogo(){const c=cnv(LOGO.naturalWidth,LOGO.naturalHeight),g=c.getContext('2d');g.drawImage(LOGO,0,0);g.globalCompositeOperation='source-in';g.fillStyle='#fbf6ef';g.fillRect(0,0,c.width,c.height);return c;}
-function drawTitle(){const g=titleC.getContext('2d');g.clearRect(0,0,2048,1024);g.textAlign='center';
-  g.shadowColor='rgba(40,15,5,.45)';g.shadowBlur=10;g.shadowOffsetY=3;
-  if(LOGO.complete&&LOGO.naturalWidth){const lw=500,lh=lw*LOGO.naturalHeight/LOGO.naturalWidth;g.drawImage(whiteLogo(),1024-lw/2,80,lw,lh);}
-  g.fillStyle='rgba(251,246,239,.85)';g.font=`500 40px ${SANS}`;spacedC(g,'PHOTOGRAPHY EXHIBITION  ·  2026',1024,255,10);
-  g.fillStyle='#fbf6ef';g.font=`600 150px ${SERIF}`;g.fillText('각자의 시선으로',1024,450);g.fillText('담은 계명대학교',1024,630);
-  g.fillRect(1000,700,48,4);
-  g.font=`400 52px ${SANS}`;g.fillText(MEMBERS.map(m=>m.name).join('   ·   '),1024,800);
-  g.font=`400 36px ${SANS}`;g.fillStyle='rgba(251,246,239,.8)';g.fillText(`8조  ·  네 개의 구역, 네 개의 시선  ·  작품 ${MEMBERS.length*PER}점`,1024,880);updTex(titleT,titleC);}
+const titleC=cnv(2048,1024),titleT=texFrom(titleC);const LOGO=new Image();LOGO.onload=()=>drawTitle();LOGO.src='kmu-emblem.png';
+const KMU_BLUE='#0a4ea3';
+function tintLogo(col){const c=cnv(LOGO.naturalWidth,LOGO.naturalHeight),g=c.getContext('2d');g.drawImage(LOGO,0,0);g.globalCompositeOperation='source-in';g.fillStyle=col;g.fillRect(0,0,c.width,c.height);return c;}
+function panel(g){g.save();g.shadowColor='rgba(40,20,10,.45)';g.shadowBlur=26;g.shadowOffsetY=8;g.fillStyle='#f7f1e6';rr(g,150,40,1748,944,14);g.fill();g.restore();
+  g.strokeStyle='rgba(74,48,32,.35)';g.lineWidth=4;rr(g,176,66,1696,892,8);g.stroke();}
+function drawTitle(){const g=titleC.getContext('2d');g.clearRect(0,0,2048,1024);panel(g);g.textAlign='center';
+  {g.font=`700 76px ${SANS}`;const tw=g.measureText('계명대학교').width,lh=150,lw=LOGO.naturalWidth?lh*LOGO.naturalWidth/LOGO.naturalHeight:0,gap=26,x0=1024-(lw+gap+tw)/2;
+   if(LOGO.complete&&LOGO.naturalWidth)g.drawImage(LOGO,x0,92,lw,lh);g.fillStyle=KMU_BLUE;g.textAlign='left';g.fillText('계명대학교',x0+lw+gap,194);g.textAlign='center';}
+  g.fillStyle='#7a6a5a';g.font=`500 38px ${SANS}`;spacedC(g,'PHOTOGRAPHY EXHIBITION  ·  2026',1024,300,10);
+  g.fillStyle='#1c1b19';g.font=`700 150px ${SERIF}`;g.fillText('각자의 시선으로',1024,465);g.fillText('담은 계명대학교',1024,640);
+  g.fillStyle='#8a3b2a';g.fillRect(996,700,56,5);
+  g.fillStyle='#2b2622';g.font=`500 54px ${SANS}`;g.fillText(MEMBERS.map(m=>m.name).join('   ·   '),1024,800);
+  g.font=`400 36px ${SANS}`;g.fillStyle='#6f6458';g.fillText(`8조  ·  네 개의 구역, 네 개의 시선  ·  작품 ${MEMBERS.length*PER}점`,1024,880);updTex(titleT,titleC);}
 place(add({mode:0,tex:titleT,blend:true}),[0,1.55,TW.d/2+.006],0,[5.2,2.6,1]);
 const backC=cnv(2048,1024),backT=texFrom(backC);
-function drawBack(){const g=backC.getContext('2d');g.clearRect(0,0,2048,1024);g.textAlign='center';
-  g.shadowColor='rgba(40,15,5,.45)';g.shadowBlur=10;g.shadowOffsetY=3;const W='#fbf6ef';
-  g.fillStyle='rgba(251,246,239,.8)';g.font=`500 38px ${SANS}`;spacedC(g,'참여 작가 안내',1024,140,14);
-  g.fillStyle=W;g.font=`500 66px ${SERIF}`;g.fillText('같은 캠퍼스, 서로 다른 시선',1024,260);
-  g.font=`400 38px ${SANS}`;
+function drawBack(){const g=backC.getContext('2d');g.clearRect(0,0,2048,1024);panel(g);g.textAlign='center';const D='#1c1b19';
+  g.fillStyle='#7a6a5a';g.font=`500 38px ${SANS}`;spacedC(g,'참여 작가 안내',1024,150,14);
+  g.fillStyle=D;g.font=`700 70px ${SERIF}`;g.fillText('같은 캠퍼스, 서로 다른 시선',1024,265);
+  g.font=`400 38px ${SANS}`;g.fillStyle='#3a332c';
   ['네 사람이 각자 여덟 장의 사진으로 계명대학교를 담았습니다.','흰 가벽 앞면엔 대표작, 뒷면과 뒤쪽 벽엔 나머지 작품이 있어요.'].forEach((l,i)=>g.fillText(l,1024,350+i*58));
-  // 미니 배치도 (이 면을 보는 사람 기준: 남쪽을 바라봄)
-  const cx=1024,cy=720,s=150;g.shadowBlur=0;g.shadowOffsetY=0;g.strokeStyle=W;g.lineWidth=5;g.strokeRect(cx-s,cy-s,s*2,s*2);
-  g.fillStyle='#c9a48a';g.fillRect(cx-s*.38,cy-5,s*.76,10);
-  g.fillStyle=W;const p=s*.62,bl=s*.85;g.fillRect(cx-bl/2,cy-p-5,bl,10);g.fillRect(cx-bl/2,cy+p-5,bl,10);g.fillRect(cx-p-5,cy-bl/2,10,bl);g.fillRect(cx+p-5,cy-bl/2,10,bl);
-  g.font=`500 34px ${SANS}`;
-  [[MEMBERS[2].name,cx,cy-s-22],[MEMBERS[3].name,cx+s+90,cy+12],[MEMBERS[0].name,cx,cy+s+50],[MEMBERS[1].name,cx-s-90,cy+12]].forEach(([t,x,y])=>g.fillText(t,x,y));
-  g.fillStyle='#e0745e';g.beginPath();g.arc(cx,cy+22,9,0,7);g.fill();updTex(backT,backC);}
+  const cx=1024,cy=705,s=145;g.strokeStyle=D;g.lineWidth=5;g.strokeRect(cx-s,cy-s,s*2,s*2);
+  g.fillStyle='#a34a35';g.fillRect(cx-s*.38,cy-5,s*.76,10);
+  g.fillStyle='#8a7f72';const p=s*.62,bl=s*.85;g.fillRect(cx-bl/2,cy-p-5,bl,10);g.fillRect(cx-bl/2,cy+p-5,bl,10);g.fillRect(cx-p-5,cy-bl/2,10,bl);g.fillRect(cx+p-5,cy-bl/2,10,bl);
+  g.fillStyle=D;g.font=`500 34px ${SANS}`;
+  [[MEMBERS[2].name,cx,cy-s-20],[MEMBERS[3].name,cx+s+90,cy+12],[MEMBERS[0].name,cx,cy+s+48],[MEMBERS[1].name,cx-s-90,cy+12]].forEach(([t,x,y])=>g.fillText(t,x,y));
+  g.fillStyle='#d2553f';g.beginPath();g.arc(cx,cy+22,9,0,7);g.fill();updTex(backT,backC);}
 place(add({mode:0,tex:backT,blend:true}),[0,1.55,-TW.d/2-.006],Math.PI,[5.2,2.6,1]);
 
 // 외벽 머리글 (가벽 너머로 보이게)
