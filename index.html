@@ -180,9 +180,9 @@ const GALLERY_DATA=[ // 구역 순서: 북(정면 안쪽) → 동(오른쪽) →
     {img:"hong-4.jpg",title:"은행나무 길 3",place:"정문",desc:"길을 덮던 은행잎이 포대에 담겼다. 색은 그대로, 이름만 달라졌다."},
     {img:"hong-1.jpg",title:"가을 야외극장",place:"노천강당",desc:"단풍이 물든 캠퍼스 야외극장. 텅 빈 객석 너머로 파란 무대와 도시가 보인다."},
     {img:"hong-5.jpg",title:"정문, 위를 보다",place:"정문",desc:"정문 아래서 올려다본 열주. 같은 기둥이 이어져 깊이를 만든다."},
-    {img:"hong-6.jpg",title:"벽돌 바닥에서 단풍까지",place:"계명대 캠퍼스",desc:"붉은 벽돌 바닥에서 분수, 주황과 노랑 단풍으로 색이 층층이 이어진다."},
-    {img:"hong-7.jpg",title:"나무가 만든 길",place:"계명대 캠퍼스",desc:"가지가 아치처럼 이어져 시선을 길 끝 건물까지 데려간다."},
-    {img:"hong-8.jpg",title:"정문으로 가는 길",place:"정문",desc:"정문을 향해 뻗은 길과 하늘. 같은 길이 안과 밖을 잇는다."},
+    {img:"hong-6.jpg",title:"벽돌 바닥에서 단풍까지",place:"도서관",desc:"붉은 벽돌 바닥에서 분수, 주황과 노랑 단풍으로 색이 층층이 이어진다."},
+    {img:"hong-7.jpg",title:"나무가 만든 길",place:"도서관",desc:"가지가 아치처럼 이어져 시선을 길 끝 건물까지 데려간다."},
+    {img:"hong-8.jpg",title:"정문으로 가는 길",place:"정문",desc:"정문 앞 도로. 나무 뒤로 해가 비쳐 하늘이 환하게 열린다."},
   ]},
   {name:"송민규",intro:"나의 시선 — 한 줄 소개를 적어 주세요",works:[]},
   {name:"김도균",intro:"나의 시선 — 한 줄 소개를 적어 주세요",works:[]},
@@ -388,7 +388,7 @@ function wrapN(g,text,maxW,n){const out=[];let line='';
 function spaced(g,text,x,y,sp){for(const ch of text){g.fillText(ch,x,y);x+=g.measureText(ch).width+sp;}}
 function spacedC(g,text,cx,y,sp){let w=0;for(const ch of text)w+=g.measureText(ch).width+sp;g.textAlign='left';spaced(g,text,cx-w/2,y,sp);g.textAlign='center';}
 
-const titleC=cnv(2048,1024),titleT=texFrom(titleC);const LOGO=new Image();LOGO.onload=()=>drawTitle();LOGO.src='kmu-emblem.png';
+const titleC=cnv(2048,1024),titleT=texFrom(titleC);const LOGO=new Image();LOGO.onload=()=>drawTitle();LOGO.src='img/kmu-emblem.png';
 const KMU_BLUE='#0a4ea3';
 function tintLogo(col){const c=cnv(LOGO.naturalWidth,LOGO.naturalHeight),g=c.getContext('2d');g.drawImage(LOGO,0,0);g.globalCompositeOperation='source-in';g.fillStyle=col;g.fillRect(0,0,c.width,c.height);return c;}
 function panel(g){g.save();g.shadowColor='rgba(40,20,10,.45)';g.shadowBlur=26;g.shadowOffsetY=8;g.fillStyle='#f7f1e6';rr(g,150,40,1748,944,14);g.fill();g.restore();
