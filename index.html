@@ -445,7 +445,7 @@ const reps=WALLS.map((W,w)=>[FRONTS[w],BACKS[w]].map(S=>{const c=cnv(1024,256),t
 function drawRep(w){reps[w].forEach(({c,t})=>{const g=c.getContext('2d');g.clearRect(0,0,1024,256);g.textAlign='left';
   g.fillStyle='#a34a35';g.fillRect(16,34,40,4);
   g.fillStyle='#1c1b19';g.font=`700 104px ${SERIF}`;g.fillText('대표작',12,142);
-  g.fillStyle='#8a847a';g.font=`500 30px ${SANS}`;spaced(g,`REPRESENTATIVE WORKS  ·  ${MEMBERS[w].name}`,16,206,7);g.textAlign='center';updTex(t,c);});}
+  g.fillStyle='#4a4640';g.font=`500 40px ${SANS}`;spaced(g,'사진영상론_01',16,208,5);g.textAlign='center';updTex(t,c);});}
 // ============ 액자 ============
 const LAY={front:{maxW:2.2,maxH:1.45,cy:1.65,lw:1.1},back:{maxW:1.35,maxH:.95,cy:1.65,lw:.95},wall:{maxW:1.3,maxH:.95,cy:1.75,lw:.95}};
 const frames=[];
