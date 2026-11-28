@@ -141,7 +141,7 @@ input::placeholder,textarea::placeholder{color:#9a948a!important;-webkit-text-fi
     <ul>
       <li>이름을 적고, 일곱 동물 중 하나와 색을 골라 입장하세요.</li>
       <li>컴퓨터는 WASD 키로 걷고, 드래그로 둘러봐요. 휴대폰은 화면 왼쪽을 드래그하면 이동, 오른쪽을 드래그하면 시점 변경이에요.</li>
-      <li>흰 가벽 앞면엔 대표작, 뒷면과 뒤쪽 벽엔 나머지 작품이 걸려 있어요. 작품을 누르면 제목과 장소, 설명을 크게 볼 수 있어요.</li>
+      <li>흰 가벽의 앞뒤에는 한 사람당 세 장의 대표작이, 바깥 벽에는 나머지 작품이 걸려 있어요. 작품을 누르면 제목과 장소, 설명을 크게 볼 수 있어요.</li>
       <li>왼쪽 아래 ‘조감도’를 누르면 전시장 전체를 위에서 볼 수 있어요.</li>
       <li>아래쪽 입력창에 쓰면 머리 위에 말풍선이 떠요. 같은 시간에 들어온 사람과 대화해 보세요.</li>
     </ul>
@@ -425,7 +425,7 @@ function drawBack(){const g=backC.getContext('2d');g.clearRect(0,0,2048,1024);pa
   g.fillStyle='#7a6a5a';g.font=`500 38px ${SANS}`;spacedC(g,'참여 작가 안내',1024,150,14);
   g.fillStyle=D;g.font=`700 70px ${SERIF}`;g.fillText('같은 캠퍼스, 서로 다른 시선',1024,265);
   g.font=`400 38px ${SANS}`;g.fillStyle='#3a332c';
-  ['네 사람이 각자 여덟 장의 사진으로 계명대학교를 담았습니다.','흰 가벽 앞면엔 대표작, 뒷면과 뒤쪽 벽엔 나머지 작품이 있어요.'].forEach((l,i)=>g.fillText(l,1024,350+i*58));
+  ['네 사람이 각자 여덟 장의 사진으로 계명대학교를 담았습니다.','흰 가벽 앞뒤엔 각자의 대표작 3점, 바깥 벽엔 나머지 작품이 있어요.'].forEach((l,i)=>g.fillText(l,1024,350+i*58));
   const cx=1024,cy=705,s=145;g.strokeStyle=D;g.lineWidth=5;g.strokeRect(cx-s,cy-s,s*2,s*2);
   g.fillStyle='#a34a35';g.fillRect(cx-s*.38,cy-5,s*.76,10);
   g.fillStyle='#8a7f72';const p=s*.62,bl=s*.85;g.fillRect(cx-bl/2,cy-p-5,bl,10);g.fillRect(cx-bl/2,cy+p-5,bl,10);g.fillRect(cx-p-5,cy-bl/2,10,bl);g.fillRect(cx+p-5,cy-bl/2,10,bl);
@@ -535,7 +535,7 @@ function render(){
 let viewing=-1;
 function openViewer(i){if(ov){ov=null;ovBtn();}viewing=i;const a=ARTWORKS[i],f=frames[i];$('viewer').style.display='flex';$('edit').style.display='none';
   $('vImg').src=a._src||a.img||placeholderCanvas(i).toDataURL();
-  $('vNo').textContent=`${MEMBERS[f.m].name}  ·  ${String(f.k+1).padStart(2,'0')} / ${String(PER).padStart(2,'0')}${f.k===0?'  ·  대표작':''}`;
+  $('vNo').textContent=`${MEMBERS[f.m].name}  ·  ${String(f.k+1).padStart(2,'0')} / ${String(PER).padStart(2,'0')}${f.k<3?'  ·  대표작':''}`;
   $('vTitle').textContent=a.title;$('vBy').textContent=`${a.artist} · ${a.place||'사진'}`;$('vDesc').textContent=a.desc||'작품 설명이 곧 추가됩니다.';
   $('eT').value=a.title;$('eD').value=a.desc;flyTo(i);}
 function closeViewer(){$('viewer').style.display='none';viewing=-1;}
